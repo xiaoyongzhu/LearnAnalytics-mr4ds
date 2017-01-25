@@ -19,7 +19,7 @@ Once you have a working MRS environment, you'll need to do the following
 	- render all course Rmds into PDFs/htmls
 	- You'll need to be in `mr4ds` folder, so `cd ../` if you are currently `mr4ds/Instructor-Resources`
 	- render the materials: `Rscript Instructor-Resources/1-render-modules.R`
-	- **NOTE** - I'll always keep the latest version of the rendered documents on github, so you could directly run the course modules from there. Rendering it yourself ensures you have a working environment that is capable of running all the course material.
+	- **NOTE** - I'll always keep the latest version of the rendered documents on github, so you could directly run the course modules from a downloaded copy of the course repoistory. Rendering it yourself ensures you have a working environment that is capable of running all the course material.
 3. [2-convert-rmd-ipynb.sh](https://github.com/Azure/mr4ds/blob/master/Instructor-Resources/2-convert-rmd-ipynb.sh)
 	- If you want jupyter notebooks as well
 	- `./Instructor-Resources/2-convert-rmd-ipynb.sh`
