@@ -23,16 +23,18 @@ options(repos = r)
 # on ubuntu `sudo apt-get install libgeos libgeos-dev`
 pkgs_to_install <- c("devtools", 
                      # "data.table",
-                     "stringr", 
-                     "broom", "magrittr", "dplyr",
-                     "lubridate",
+                     # "stringr", 
+                     # "broom", "magrittr", "dplyr",
+                     # "lubridate",
                      # "rgeos", "sp", "maptools",
                      # "seriation",
-                     "ggplot2",
+                     # "ggplot2",
                      # "gridExtra",
                      # "ggrepel",
-                     "tidyr", "revealjs",
-                     "plotly"
+                     # "tidyr", 
+                     "tidyverse",
+                     "revealjs",
+                     "plotly", 'sparklyr'
                      )
 pks_missing <- pkgs_to_install[!(pkgs_to_install %in% installed.packages()[, 1])]
 
