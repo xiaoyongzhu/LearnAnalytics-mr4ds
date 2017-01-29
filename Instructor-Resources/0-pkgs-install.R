@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+args <- commandArgs(trailingOnly=TRUE)
 
 # package insallation -----------------------------------------------------
 
@@ -5,12 +7,12 @@
 r <- getOption('repos')
 # set mirror to something a bit more recent
 
-if (args[1] == "latest") {
+if (length(args) != 0 & args[1] == "latest") {
        mran_date <- Sys.Date() - 1
        r[["CRAN"]] <- paste0("https://mran.revolutionanalytics.com/snapshot/", mran_date)
 
 } else {
-       r["CRAN"] <- "https://mran.revolutionanalytics.com/snapshot/2017-01-15/"
+       r[["CRAN"]] <- "https://mran.revolutionanalytics.com/snapshot/2017-01-15/"
 }
 
 
