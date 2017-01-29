@@ -24,7 +24,7 @@ Once you have a working MRS environment, you'll need to do the following
 	- If you want jupyter notebooks as well
 	- `./Instructor-Resources/2-convert-rmd-ipynb.sh`
 4. [create-users.py](https://github.com/Azure/mr4ds/blob/master/Instructor-Resources/create_users.py)
-	- If you're creating a VM for the students, this script will create a set of user accounts with password
+	- If you're creating a VM for the students, this script will create a set of user accounts with passwords. You should have a csv file with two columns, one containing usernames, and the other containing passwords. This will create users from that csv file.
 	- `python Instructor-Resources/create_users.py`
 
 ## Troubleshooting
