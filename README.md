@@ -5,6 +5,17 @@ Microsoft R for Data Science Workshop
 
 Welcome to the Microsoft R for Data Science Course Repository. You can find the latest materials from the workshop here, and links for course materials from prior iterations of the course ca be found in the [version pane](https://github.com/akzaidi/R-cadence/releases). While this course is intended for data scientists and analysts interested in the Microsoft R programming stack (i.e., Microsoft employees in the Algorithms and Data Science group), other programmers might find the material useful as well.
 
+
+## For Instructors:
+
+1. Please view the instructions given in the [Instructor-Resources folder](https://github.com/Azure/mr4ds/tree/master/Instructor-Resources).
+
+
+## For Students:
+
+1. The rendered course materials are available in the [Student-Resources folder](https://github.com/Azure/mr4ds/tree/master/Student-Resources).
+
+
 ## Class Links
 
 + [course webpage](https://azure.github.io/mr4ds/)
