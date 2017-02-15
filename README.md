@@ -15,6 +15,7 @@ Welcome to the Microsoft R for Data Science Course Repository. You can find the 
 
 1. The rendered course materials are available in the [Student-Resources folder](https://github.com/Azure/mr4ds/tree/master/Student-Resources).
 
+During class, pleae review the links and information below:
 
 ## Class Links
 
