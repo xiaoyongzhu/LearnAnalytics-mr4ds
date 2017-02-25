@@ -1,5 +1,5 @@
 ---
-title: "Lab 0 - Data Structures"
+title: "Lab 1 - Data Structures"
 author: "Ali Zaidi"
 date: "10/10/2016"
 output: html_document
@@ -29,11 +29,13 @@ typeof(booleans)
 class(booleans)
 ```
 
-can you mix types in a vector?
++ can you mix types in a vector?
+
++ what happens when you mix the numeric with letters?
 
 ```{r coercion}
 combine_char_num <- c(random_norms, some_letters)
-typeof(combine_char_num)
+# check the type of combine_char_num
 ```
 
 ## Lists
@@ -52,10 +54,15 @@ matrices, same length, same type
 
 ```{r matrices}
 matrix_num <- matrix(rnorm(10), nrow = 5, ncol = 2)
-# reuse
-matrix_num_reuse <- matrix(rnorm(11), nrow = 6, ncol = 4)
+# what happens if you mix types?
 matrix_mix <- matrix(c(rnorm(10), letters[1:10]), nrow = 10, ncol = 2)
 typeof(matrix_mix)
+```
+
+be careful about specifying matrices, as they will auto-fill when there is an insufficient amount of elements;
+
+```{r matrices-filling}
+matrix_num_reuse <- matrix(rnorm(11), nrow = 6, ncol = 4)
 ```
 
 

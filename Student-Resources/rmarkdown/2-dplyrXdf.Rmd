@@ -43,7 +43,7 @@ At the end of this session, you will have learned how to:
 
 ## Microsoft R Component Stack
 
-![Microsoft R Family](images/mrcomponents.png)
+![Microsoft R Family](images/distros_r.png)
 
 <aside class="notes">
 ScaleR: suite of HPA functions for data manipulation and modeling, plus some custom HPC functionality
@@ -93,7 +93,7 @@ your_dir <- paste0('/datadrive/', your_name)
 # File Path to your Data
 your_data <- file.path(your_dir, 'tripdata_2015.xdf')
 dir.create(your_dir)
-download.file("http://alizaidi.blob.core.windows.net/training/yellow_tripdata_2015.xdf", 
+download.file("http://alizaidi.blob.core.windows.net/training/trainingData/manhattan.xdf", 
               destfile = your_data)
 ```
 
@@ -185,7 +185,8 @@ persist(taxi_transform, outFile = "/datadrive/alizaidi/taxiTransform.xdf") -> ta
 ---
 ```{r}
 taxi_group <- taxi_transform %>%
-  group_by(pickup_nhood) %>% 
+  group_by(pickup_nhood) %>%
+  summarise(ave_tip = mean(tip_pct))
 taxi_group %>% head
 ```
 

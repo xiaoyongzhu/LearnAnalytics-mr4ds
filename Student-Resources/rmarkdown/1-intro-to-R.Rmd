@@ -68,11 +68,11 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE, fig.align = 'center')
 ## Prerequisites
 ### Computing Environments
 
-* R Server 8.0.5 or above
+* R Server 8.0.5 or above (most recent version is 9.0.2)
 * Azure Credits
 * Can use the [Linux DSVM](https://azure.microsoft.com/en-us/documentation/articles/machine-learning-data-science-linux-dsvm-intro/)
 * Or the [Windows DSVM](https://azure.microsoft.com/en-us/documentation/articles/machine-learning-data-science-provision-vm/)
-* For IDE: use [RTVS](https://www.visualstudio.com/vs/rtvs/), [RStudio Server](https://www.rstudio.com/products/rstudio/download3/), [JupyterHub](https://jupyterhub.readthedocs.io/en/latest/), [JupyterLab](http://jupyterlab-tutorial.readthedocs.io/en/latest/)... 
+* For IDE: choises are [RTVS](https://www.visualstudio.com/vs/rtvs/), [RStudio Server](https://www.rstudio.com/products/rstudio/download3/), [JupyterHub](https://jupyterhub.readthedocs.io/en/latest/), [JupyterLab](http://jupyterlab-tutorial.readthedocs.io/en/latest/)... 
     + Whatever you're comfortable with!
 
 ## Development Environments 
@@ -81,8 +81,8 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE, fig.align = 'center')
 * The most popular integrated development environment for R is [RStudio](https://www.rstudio.com/)
 * The RStudio IDE is entirely html/javascript based, so completely cross-platform
 * RStudio Server provides a full IDE in your browser: perfect for cloud instances
-* For Windows machines, we have recently announced the general availability of [R Tools for Visual Studio, RTVS](https://www.visualstudio.com/en-us/features/rtvs-vs.aspx)
-* RTVS supports connectivity to Azure and SQL Server
+* For Windows machines, 2016 provided general availability of [R Tools for Visual Studio, RTVS](https://www.visualstudio.com/en-us/features/rtvs-vs.aspx)
+* RTVS supports connectivity to Azure and SQL Server for remote connectivity
 
 
 ## What is R? 
@@ -138,6 +138,7 @@ R follows the [Unix philosophy](http://en.wikipedia.org/wiki/Unix_philosophy)
 * Large user community, both within academia and industry
 * It is designed by statisticians 
 
+
 ## Weaknesses of R 
 ### Where R Falls Short
 
@@ -146,6 +147,10 @@ R follows the [Unix philosophy](http://en.wikipedia.org/wiki/Unix_philosophy)
 * May make large demands on system resources, namely memory
 * Data capacity limited by memory
 * Single-threaded
+
+## Distributions of R
+
+![](images/distros_r.png)
 
 ## Some Essential Open Source Packages
 
@@ -230,7 +235,7 @@ Check your CRAN mirror with `getOption("repos")`.
 
 + To find the type of an object, use `class` (_higher level representation_)
 + To find how the object is stored in memory, use `typeof` (_lower level representation_)
-+ Good time to do Lab 0!
++ Good time to do Lab 1!
 
 # Data Manipulation with the `dplyr` Package
 
@@ -331,7 +336,7 @@ At the end of this session, you will have learned:
 ```{r}
 library(dplyr)
 library(stringr)
-taxi_url <- "http://alizaidi.blob.core.windows.net/training/taxi_df.rds"
+taxi_url <- "http://alizaidi.blob.core.windows.net/training/trainingData/manhattan_df.rds"
 taxi_df  <- readRDS(gzcon(url(taxi_url)))
 (taxi_df <- tbl_df(taxi_df))
 ```
@@ -359,6 +364,7 @@ Your turn:
 
 * How many observations started in Harlem?
   - pick both sides of Harlem, including east harlem
+  - *hint*: it might be useful to use the `str_detect` function from `stringr`
 * How many observations that started in Harlem ended in the Financial District?
 
 ## Solution
@@ -368,6 +374,9 @@ library(stringr)
 table(taxi_df$pickup_nhood)
 harlem_pickups <- filter(taxi_df, str_detect(pickup_nhood, "Harlem"))
 harlem_pickups
+# uncomment the line below (ctrl+shift+c) and filter harlem_pickups on Financial District
+# how many rows?
+# fidi <- filter(harlem_pickups, ...)
 ```
 
 ## Select a set of columns
@@ -689,7 +698,7 @@ tile_plot_hood <- function(df = taxi_hood_sum()) {
 
 * Now we can create our plot by simply calling our two functions
 
-```{r, fig.height = 8, fig.width = 8}
+```{r, fig.height = 8, fig.width = 8, eval = FALSE}
 library(plotly)
 taxi_hood_sum(taxi_df) %>% tile_plot_hood %>% ggplotly
 ```
@@ -770,6 +779,138 @@ taxi_df %>% sample_n(10^5) %>%
   do(tidy(lm(tip_pct ~ pickup_nhood + passenger_count + pickup_hour,
      data = .)))
 ```
+
+
+## Spatial Visualizations with `ggplot2` and `purrr`
+
+### Visualizing Pickups by Time
+
++ Let's try another example
++ We will visualize pickups and index them by time
+
+
+```{r pickup-counts}
+
+# min and max coordinates:
+min_lat <- 40.5774
+max_lat <- 40.9176
+min_long <- -74.15
+max_long <- -73.7004
+
+pickups <- taxi_df %>% 
+  filter(pickup_longitude > min_long,
+         pickup_latitude < max_lat,
+         dropoff_longitude > min_long,
+         dropoff_latitude < max_lat) %>% 
+  group_by(pickup_hour, 
+           pickup_longitude, 
+           pickup_latitude) %>% 
+  summarise(num_pickups = n())
+
+```
+
+## Load Additional Libraries
+
+```{r addtnl-libs}
+
+library(purrr)
+library(lubridate)
+library(RColorBrewer)
+library(magick)
+```
+
+
+## Visualize Pickups
+
+### ggplot2 Theme
+
++ `ggplot` will give very aesthetically appealing plots by default
++ However, it really shines in it's ability to customize
++ See the `ggthemes` for some template themes
++ We'll use the theme below inspired from [Max Woolf's Tweet on this dataset](https://twitter.com/minimaxir/status/628921315198566400)
+
+
+```{r ggtheme}
+
+theme_map_dark <- function(palate_color = "Greys") {
+  
+  palate <- brewer.pal(palate_color, n=9)
+  color.background = "black"
+  color.grid.minor = "black"
+  color.grid.major = "black"
+  color.axis.text = palate[1]
+  color.axis.title = palate[1]
+  color.title = palate[1]
+  
+  font.title <- "Source Sans Pro"
+  font.axis <- "Open Sans Condensed Bold"
+  
+  theme_bw(base_size=5) +
+    theme(panel.background=element_rect(fill=color.background, color=color.background)) +
+    theme(plot.background=element_rect(fill=color.background, color=color.background)) +
+    theme(panel.border=element_rect(color=color.background)) +
+    theme(panel.grid.major=element_blank()) +
+    theme(panel.grid.minor=element_blank()) +
+    theme(axis.ticks=element_blank()) +
+    theme(legend.background = element_rect(fill=color.background)) +
+    theme(legend.text = element_text(size=3,colour=color.axis.title,family=font.axis)) +
+    theme(legend.title = element_blank(), legend.position="top", legend.direction="horizontal") +
+    theme(legend.key.width=unit(1, "cm"), legend.key.height=unit(0.25, "cm"), legend.margin=unit(-0.5,"cm")) +
+    theme(plot.title=element_text(colour=color.title,family=font.title, size=14)) +
+    theme(plot.subtitle = element_text(colour=color.title,family=font.title, size=12)) +
+    theme(axis.text.x=element_blank()) +
+    theme(axis.text.y=element_blank()) +
+    theme(axis.title.y=element_blank()) +
+    theme(axis.title.x=element_blank()) +
+    theme(strip.background = element_rect(fill=color.background, 
+                                          color=color.background),
+          strip.text=element_text(size=7,colour=color.axis.title,family=font.title))
+  
+}
+
+```
+
+## Plot Function
+
+### Complete the Function Below
+
+```{r map_nyc, eval = FALSE}
+
+
+# x axis should be longitude
+# y axis should be latitude
+map_nyc <- function(df, pickup_hr) {
+  
+  gplot <- ggplot(df, 
+                  aes(x=..., 
+                      y=...)) +
+    geom_point(color="white", size=0.06) +
+    scale_x_continuous(limits=c(min_long, max_long)) +
+    scale_y_continuous(limits=c(min_lat, max_lat)) +
+    theme_map_dark() + 
+    labs(title = "Map of NYC Taxi Pickups",
+         subtitle = paste0("Pickups between ", pickup_hr))
+  
+  return(gplot)
+  
+}
+
+```
+
+## Iterate and Plot!
+### Now we can Iterate and Plot
+
+```{r purrr-map, eval = FALSE}
+
+hour_plots <- ungroup(pickups) %>% 
+  filter(num_pickups > 1) %>% 
+  split(.$pickup_hour) %>% 
+  map(~ map_nyc(.x, pickup_hr = .x$pickup_hour[1]))
+
+hour_plots
+
+```
+
 
 
 ## Summary
