@@ -31,13 +31,6 @@ output:
 
 ## Background
 
-+ Studied statistics and machine learning at the University of Toronto
-+ Joined Microsoft through the Revolution Analytics acquistion last year
-+ Have used R for about 7 years now
-+ Hadoop for 2.5 years
-+ Spark for 1.5 years
-
-
 ## Git Up Off That Thang
 
 ![](http://img.deusm.com/informationweek/2014/10/1316800/Microsoft_LOVES_Linux.jpg)
