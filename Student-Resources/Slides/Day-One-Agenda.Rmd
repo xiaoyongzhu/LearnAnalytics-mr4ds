@@ -64,7 +64,7 @@ output:
 ## Microsoft R Family
 
 <div style="width:800px">
-![](https://raw.githubusercontent.com/Azure/LearnAnalytics-mr4ds/blob/master/Student-Resources/rmarkdown/images/mr-family.png)
+![](https://raw.githubusercontent.com/Azure/LearnAnalytics-mr4ds/master/Student-Resources/rmarkdown/images/mr-family.png)
 </div>
 
 
