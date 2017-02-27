@@ -816,7 +816,6 @@ pickups <- taxi_df %>%
 library(purrr)
 library(lubridate)
 library(RColorBrewer)
-library(magick)
 ```
 
 
