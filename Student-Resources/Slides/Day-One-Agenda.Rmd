@@ -73,6 +73,6 @@ output:
 + [Data Scientist's Perspective on Microsoft R](http://blog.revolutionanalytics.com/2016/04/data-scientist-perspective.html)
 
 <div style="width:700px">
-![](https://raw.githubusercontent.com/akzaidi/R-cadence/master/images/mrcomponents.png)
+![](https://raw.githubusercontent.com/Azure/LearnAnalytics-mr4ds/master/Student-Resources/rmarkdown/images/mrcomponents.png)
 </div>
 
