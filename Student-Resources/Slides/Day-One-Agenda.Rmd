@@ -22,7 +22,7 @@ output:
 ## R U Ready?
 
 * The goal of this course is to show you how to have fun with R
-* Course Webpage: [github.com/akzaidi/R-cadence](https://github.com/akzaidi/R-cadence)
+* Course Webpage: [github.com/Azure/LearnAnalytics-mr4ds/](https://github.com/Azure/LearnAnalytics-mr4ds)
 
 ## About Myself
 
@@ -46,8 +46,8 @@ output:
 + Create a GitHub account: [github.com/join](https://github.com/join)
 + Download [GitKraken](https://www.gitkraken.com/) locally
 + Fork the course repository to your own account
-+ Set upstream: https://github.com/akzaidi/R-cadence.git
-    - git remote add upstream https://github.com/akzaidi/R-cadence.git
++ Set upstream: https://github.com/Azure/LearnAnalytics-mr4ds.git
+    - git remote add upstream https://github.com/Azure/LearnAnalytics-mr4ds.git
 
 
 # Day One's Plan
@@ -64,7 +64,7 @@ output:
 ## Microsoft R Family
 
 <div style="width:800px">
-![](https://raw.githubusercontent.com/akzaidi/R-cadence/master/images/mr-family.png)
+![](https://raw.githubusercontent.com/Azure/LearnAnalytics-mr4ds/master/images/mr-family.png)
 </div>
 
 
