@@ -309,11 +309,11 @@ The doXdf verb is similar to do, but where do splits its input into one data fra
 
 ---
 
-```{r, eval = FALSE}
+```{r doXdf-models}
 taxi_models <- taxi_xdf %>% group_by(pickup_dow) %>% doXdf(model = rxLinMod(tip_amount ~ fare_amount, data = .))
 ```
 
-```{r}
+```{r model-view}
 taxi_models
 taxi_models$model[[1]]
 ```
@@ -326,7 +326,7 @@ Moreover, the function you apply against the splits will determine how they are 
 
 ---
 
-```{r, eval = FALSE}
+```{r broom-models}
 library(broom)
 taxi_broom <- taxi_xdf %>% group_by(pickup_dow) %>% doXdf(model = lm(tip_amount ~ fare_amount, data = .))
 ```
