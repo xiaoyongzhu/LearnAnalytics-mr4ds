@@ -826,7 +826,9 @@ library(RColorBrewer)
 + `ggplot` will give very aesthetically appealing plots by default
 + However, it really shines in it's ability to customize
 + See the `ggthemes` for some template themes
-+ We'll use the theme below inspired from [Max Woolf's Tweet on this dataset](https://twitter.com/minimaxir/status/628921315198566400)
++ We'll use the theme below inspired from [Max Woolf's Tutorial on Visualizing this Dataset with ggplot2](http://minimaxir.com/2015/11/nyc-ggplot2-howto/)[^minimaxir]
+
+[^minimaxir]: Max Woolf has a number of great tutorials on this dataset, be sure to look at this [portfolio](http://minimaxir.com/portfolio/) for other gems!
 
 
 ```{r ggtheme}
