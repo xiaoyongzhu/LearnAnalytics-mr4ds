@@ -56,11 +56,33 @@ library(tutor)
     + subsetting a list with a single square bracket always returns a list
 + To subset a list and get back just that element, use `[[ ]]`
 
+
+### Exercise
+
++ Use `c` to create a vector of numbers, separate them by using a comma.
++ You can also use the `seq` function to create a sequence of numbers. `seq` has three arguments: 1. start, 2. stop, 3. increments
++ For a sequence of numbers, you can use `:`
++ Use the single square brackets to subset the first element
++ Use the single square brackets to subset the second and fourth elements
+
+```{r datastructs, exercise=TRUE}
+
+vector <- c(1)
+
+seq(0, 10, 2)
+
+a <- 
+b <- 
+vector_num_1 <- a:b
+
+
+```
+
+
 ### Object Representation
 
 + To find the type of an object, use `class` (_higher level representation_)
 + To find how the object is stored in memory, use `typeof` (_lower level representation_)
-+ Good time to do Lab 1!
 
 ## Vectors 
 
