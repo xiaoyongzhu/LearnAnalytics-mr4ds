@@ -44,7 +44,7 @@ install.packages(c(pks_missing, 'knitr', 'formatR'))
 
 # install-dplyrXdf --------------------------------------------------------
 
-dev_pkgs <- c("RevolutionAnalytics/dplyrXdf")
+dev_pkgs <- c("RevolutionAnalytics/dplyrXdf", "rstudio/tutor")
 devtools::install_github(dev_pkgs)
 
 
