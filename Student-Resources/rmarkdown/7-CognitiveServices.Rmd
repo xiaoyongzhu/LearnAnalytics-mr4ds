@@ -5,6 +5,13 @@ author: Ali Zaidi
 
 ## Cognitive Services
 
+The Microsoft Cognitive Services provide intelligent APIs that you can use directly against your own data to make your applications more intelligent. They offer a variety of services that can be used in a variety of domains, from vision, to text, and even recommeder systems.
+
+Rather than training your own large-scale machine learning model to make intellingent predictions, you can use these services.
+
+Sign up for a free account at the [Cognitive Services Website](https://www.microsoft.com/cognitive-services).
+
+
 ```{r install-roxford}
 
 # Project Oxford API ------------------------------------------------------
