@@ -67,9 +67,13 @@ Typical Modeling Lifecycle:
 - We will work with a mortgage dataset, which contains mortgage and credit profiles for various mortgage holders
 
 ```{r create_path_to_mortgages, message = FALSE}
+## set compute context to spark
+rxSetComputeContext("spark")
 mort_path <- paste(rxGetOption("sampleDataDir"), "mortDefaultSmall.xdf", sep = "/")
-file.copy(mort_path, "mortgage.xdf", overwrite = TRUE)
-mort_xdf <- RxXdfData("mortgage.xdf")
+rxHadoopCopyFromLocal(mort_path,'/')
+rxHadoopListFiles('/')
+## You should see a file named "mortDefaultSmall.xdf" in the WASB root folder
+mort_xdf <- RxXdfData("wasb:///mortgage.xdf")
 rxGetInfo(mort_xdf, getVarInfo = TRUE, numRows = 5)
 ```
 
